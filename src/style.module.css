@@ -1,21 +1,21 @@
+/* Style de mon container qui positione en colonne mes éléments, qui prends toute la hauteur de l'écran */
 .container {
     display: flex;
     flex-direction: column;
     height: 100vh;
     padding: 25px;
+    background-color: black;
 }
 
+/* Style qui permet de diviser les 3 partie de l'application de façon à ce que le header et les recommandation soit de la même taille et le "details_films" soit 2 fois plus grand */
 .header {
     flex: 1;
-    background-color: red;
 }
 
 .details_films {
     flex: 2;
-    background-color: blue;
 }
 
 .recommandation {
     flex: 1;
-    background-color: green;
 }
