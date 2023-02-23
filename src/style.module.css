@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 25px;
+}
+
+.header {
+    flex: 1;
+    background-color: red;
+}
+
+.details_films {
+    flex: 2;
+    background-color: blue;
+}
+
+.recommandation {
+    flex: 1;
+    background-color: green;
+}
