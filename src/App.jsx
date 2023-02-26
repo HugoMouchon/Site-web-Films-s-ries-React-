@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { filmsSeriesAPI } from './api/films_series';
+import { DetailsFilms } from './components/details/DetailsFilms';
+import { RecommandationListe } from './components/RecommandationListe/RecommandationListe'
+import { Logo } from './components/Logo/Logo';
 import { BACKDROP_BASE_URL } from './config';
 import './global.css';
 import style from "./style.module.css";
-
-// Appel de la fonction "fetchpopulars" de la classe filmsSeriesAPI
-filmsSeriesAPI.fetchPopulars();
+import logo from './assets/images/logo.png';
 
 // Notre application
 export function App() {
@@ -34,16 +35,19 @@ export function App() {
             <div className={style.header}>
                 <div className="row"> {/* div pour alligner le contenu */}
                     <div className='col-4'> {/* utilisation de Bootstrap, il prendra 4 colonnes sur 12 */}
-                        <div>Logo</div>
-                        <div>Sous-titre</div>
+                        <Logo image={logo} titre="Watowatch" sousTitre="Trouve le film fais pour toi " />
                     </div>
                     <div className='col-sm-12 col-md-4'> {/* Prend tout l'ecran sur mobile sinon 4 col sur 12 sur PC (responsive)*/}
                         <input style={{ width: "100%" }} type="text" /> {/* Barre de recherche */}
                     </div>
                 </div>
             </div>
-            <div className={style.details_films}>Détails</div>
-            <div className={style.recommandation}>Recommandation</div>
+            <div className={style.details_films}>
+                {filmPopulaire && <DetailsFilms detail={filmPopulaire} />}
+            </div>
+            <div className={style.recommandation}>
+                {filmPopulaire && <RecommandationListe filmsTV={filmPopulaire} />}
+            </div>
         </div>
     );
 }

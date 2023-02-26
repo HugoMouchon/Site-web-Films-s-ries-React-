@@ -1,0 +1,26 @@
+.titre {
+    font-weight: 400;
+    font-size: 35px;
+}
+
+.etoile_container {
+    display: flex;
+}
+
+.etoile {
+    margin-top: 3px;
+    margin-left: 5px;
+}
+
+.synopsis {
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 20px;
+    height: 120px;
+    overflow-y: hidden;
+    margin-top: 10px;
+}   
+
+.synopsis:hover {
+    overflow-y: auto;
+}
