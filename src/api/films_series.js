@@ -8,5 +8,19 @@ export class filmsSeriesAPI {
     static async fetchPopulars(){
         const response = await axios.get(`${BASE_URL}tv/popular${API_KEY_PARAM}`);
         return response.data.results;
-    }    
+    };
+
+    static async fetchRecommandations(filmsTVId){
+        const response = await axios.get(`${BASE_URL}tv/${filmsTVId}/recommendations${API_KEY_PARAM}`);
+        return response.data.results;
+    };
 }
+
+
+
+
+
+
+
+
+// https://api.themoviedb.org/3/tv/{tv_id}/recommendations

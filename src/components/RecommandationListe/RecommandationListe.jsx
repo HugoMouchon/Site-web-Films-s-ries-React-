@@ -1,17 +1,17 @@
-import { SMALL_IMG_COVER_BASE_URL } from '../../config';
-import style from './style.module.css';
+// import style from './style.module.css';
+import { RecommandationListeItem } from '../RecommandationListeItem/RecommandationListeItem';
 
-export function RecommandationListe({ filmsTV }) {
+export function RecommandationListe({ tvShowlist }) {
     return (
-        <div className={style.container}>
-            <img
-                className={style.image}
-                src={SMALL_IMG_COVER_BASE_URL + filmsTV.backdrop_path}
-                alt={filmsTV.name}
-            />
-            <div className={style.titre}>
-                {filmsTV.name}
+        <>
+            <div>Vous pourriez aimer aussi:</div>
+            <div>
+                {tvShowlist.map((tvShow) => {
+                    return (
+                        <RecommandationListeItem tvShow={tvShow} onClick={() => ""} />
+                    );
+                })}
             </div>
-        </div>
+        </>
     );
-}  
+}

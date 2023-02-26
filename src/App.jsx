@@ -2,17 +2,19 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { filmsSeriesAPI } from './api/films_series';
 import { DetailsFilms } from './components/details/DetailsFilms';
-import { RecommandationListe } from './components/RecommandationListe/RecommandationListe'
 import { Logo } from './components/Logo/Logo';
 import { BACKDROP_BASE_URL } from './config';
 import './global.css';
 import style from "./style.module.css";
 import logo from './assets/images/logo.png';
+import { RecommandationListe } from './components/RecommandationListe/RecommandationListe';
+
 
 // Notre application
 export function App() {
     // Déclaration d'une constante utilisant "useState" de React avec pour valeur "filmPopulaire" et son state "setFilmPopulaire" pour le mettre à jours
     const [filmPopulaire, setFilmPopulaire] = useState();
+    const [filmRecommandationListe, setFilmRecommandationListe] = useState([]);
 
     // Fonction Asynchrone qui récupère les films les plus populaires à partir de l'API tmdb et définit le film le plus populaire comme étant le film à afficher. 
     async function fetchPopulars() {
@@ -21,12 +23,24 @@ export function App() {
             setFilmPopulaire(populars[0]);
         }
     }
+    async function fetchRecommandations(filmsTVId) {
+        const recommandations = await filmsSeriesAPI.fetchRecommandations(filmsTVId);
+        if (recommandations.length > 0) {
+            setFilmRecommandationListe(recommandations.slice(0, 10));
+        }
+    }
     // Appel de la fonction Asynchrone "fetchPopulars()" grace à l'Utilisation du Hooks "UseEffect" permettant de le rendre qu'une seule fois (grâce au [] vide).
     useEffect(() => {
         fetchPopulars();
     }, [])
 
-    console.log(filmPopulaire);
+    useEffect(() => {
+        if (filmPopulaire) {
+            fetchRecommandations(filmPopulaire.id);
+        }
+    }, [filmPopulaire])
+
+
     return (
         // Container de toute la page
         <div className={style.container}
@@ -46,7 +60,7 @@ export function App() {
                 {filmPopulaire && <DetailsFilms detail={filmPopulaire} />}
             </div>
             <div className={style.recommandation}>
-                {filmPopulaire && <RecommandationListe filmsTV={filmPopulaire} />}
+                {filmRecommandationListe && <RecommandationListe tvShowlist={filmRecommandationListe}/>}
             </div>
         </div>
     );
