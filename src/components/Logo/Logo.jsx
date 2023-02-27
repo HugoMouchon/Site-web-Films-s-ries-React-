@@ -1,5 +1,6 @@
 import style from './style.module.css';
 
+// Fonction pour afficher le Logo qui prend en paramètre une image, un titre et un sous-titre
 export function Logo({ image, titre, sousTitre }) {
     return (
         <>

@@ -4,10 +4,12 @@ body {
     font-family: Maximum Impact;
 }
 
+/* Rend transparent la scrollbar de la section recommandation */
 ::-webkit-scrollbar {
     background: transparent;
 }
 
+/* Change la couleur de fond de cette même scrollbar et applique des bord arrondis */
 ::-webkit-scrollbar-thumb:horizontal {
     background-color: rgba(255, 255, 255, 0.50);
     border-radius: 10px;

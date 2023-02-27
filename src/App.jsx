@@ -24,6 +24,7 @@ export function App() {
             setFilmPopulaire(populars[0]);
         }
     }
+    // Fonction Asynchrone qui récupère les recommandations de films ou de séries télévisées pour un ID donné, et stocke les 10 premières recommandations dans un état de composant React. 
     async function fetchRecommandations(filmsTVId) {
         const recommandations = await filmsSeriesAPI.fetchRecommandations(filmsTVId);
         if (recommandations.length > 0) {
@@ -35,6 +36,7 @@ export function App() {
         fetchPopulars();
     }, [])
 
+    // Utilisation du UseEffect qui permet de récupérer les recommandations de films ou de séries télévisées pour un film populaire donné (filmPopulaire) chaque fois que cette variable change. Cela permet d'actualiser les recommandations en temps réel en fonction du film populaire sélectionné.
     useEffect(() => {
         if (filmPopulaire) {
             fetchRecommandations(filmPopulaire.id);
@@ -47,16 +49,25 @@ export function App() {
         <div className={style.container}
             //On affiche l'image du film et on applique un leger background gris par dessus seulement si "filmPopulars" existe sinon on applique un background de couleur noir (utilisation du ternaire)
             style={{ background: filmPopulaire ? `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("${BACKDROP_BASE_URL}${filmPopulaire.backdrop_path}") no-repeat center / cover` : "black", }}>
+
             <div className={style.header}>
                 <div className="row"> {/* div pour alligner le contenu */}
                     <div className='col-4'> {/* utilisation de Bootstrap, il prendra 4 colonnes sur 12 */}
-                        <Logo image={logo} titre="Watowatch" sousTitre="Trouve le film fais pour toi " />
+                        <Logo image={logo} titre="Watowatch" sousTitre="Trouve le film fais pour toi " />{/* Appel du composant Logo qui prend en paramètre une image, un titre et un sous-titre*/}
                     </div>
                     <div className='col-sm-12 col-md-4'> {/* Prend tout l'ecran sur mobile sinon 4 col sur 12 sur PC (responsive)*/}
                         <input style={{ width: "100%" }} type="text" /> {/* Barre de recherche */}
                     </div>
                 </div>
             </div>
+
+            {/** Section "Details du film" 
+             Vérifie si "filmPopulaire" existe, si oui, il appel le composant Details et prend en paramètre "filmPopulaire
+             -> Cette div permet d'afficher :
+             * 1/ le titre
+             * 2/ la note
+             * 3/ le synopsis
+            */}
             <div className={style.details_films}>
                 {
                     filmPopulaire &&
@@ -65,6 +76,10 @@ export function App() {
                     />
                 }
             </div>
+
+            {/** Section "liste de Recommandations"
+             *  Ce code affiche une liste de recommandations de films si cette liste existe et est non-nulle (contient au moins un élément).
+            */}
             <div className={style.recommandation}>
                 {
                     filmRecommandationListe && filmRecommandationListe.length > 0 &&
