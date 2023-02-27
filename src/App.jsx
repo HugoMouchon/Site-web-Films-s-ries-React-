@@ -15,22 +15,33 @@ import { BarreDeRecherche } from './components/BarreDeRecherche/BarreDeRecherche
 // Notre application
 export function App() {
     // Déclaration d'une constante utilisant "useState" de React avec pour valeur "filmPopulaire" et son state "setFilmPopulaire" pour le mettre à jours
-    const [filmPopulaire, setFilmPopulaire] = useState();
+    const [filmPopulaire, setFilmPopulaire] = useState(null);
     const [filmRecommandationListe, setFilmRecommandationListe] = useState([]);
 
     // Fonction Asynchrone qui récupère les films les plus populaires à partir de l'API tmdb et définit le film le plus populaire comme étant le film à afficher. 
     async function fetchPopulars() {
-        const populars = await filmsSeriesAPI.fetchPopulars();
-        if (populars.length > 0) {
-            setFilmPopulaire(populars[0]);
+        // Try/catch pour retourner une erreur visuel avec un message si il y en a une
+        try {
+            const populars = await filmsSeriesAPI.fetchPopulars();
+            if (populars.length > 0) {
+                setFilmPopulaire(populars[0]);
+            }
+        } catch (error) {
+            alert("Erreur durant la recherche des séries populaires")
         }
     }
+
     // Fonction Asynchrone qui récupère les recommandations de films ou de séries télévisées pour un ID donné, et stocke les 10 premières recommandations dans un état de composant React. 
     async function fetchRecommandations(filmsTVId) {
-        const recommandations = await filmsSeriesAPI.fetchRecommandations(filmsTVId);
-        if (recommandations.length > 0) {
-            setFilmRecommandationListe(recommandations.slice(0, 10));
+        try {
+            const recommandations = await filmsSeriesAPI.fetchRecommandations(filmsTVId);
+            if (recommandations.length > 0) {
+                setFilmRecommandationListe(recommandations.slice(0, 10));
+            }
+        } catch (error) {
+            alert("Erreur durant la recherche des séries recommandées")
         }
+
     }
     // Appel de la fonction Asynchrone "fetchPopulars()" grace à l'Utilisation du Hooks "UseEffect" permettant de le rendre qu'une seule fois (grâce au [] vide).
     useEffect(() => {
@@ -44,6 +55,17 @@ export function App() {
         }
     }, [filmPopulaire])
 
+    async function rechercheFilms(nomFilm) {
+        try {
+            const searchResponse = await filmsSeriesAPI.fetchByTitle(nomFilm)
+            if (searchResponse.length > 0) {
+                setFilmPopulaire(searchResponse[0]);
+            }
+        } catch (error) {
+            alert("Erreur durant la recherche de la série ")
+        }
+
+    }
 
     return (
         // Container de toute la page
@@ -57,7 +79,8 @@ export function App() {
                         <Logo image={logo} titre="Watowatch" sousTitre="Trouve le film fais pour toi " />{/* Appel du composant Logo qui prend en paramètre une image, un titre et un sous-titre*/}
                     </div>
                     <div className='col-sm-12 col-md-4'> {/* Prend tout l'ecran sur mobile sinon 4 col sur 12 sur PC (responsive)*/}
-                        <BarreDeRecherche/> {/* Barre de recherche */}
+                        <BarreDeRecherche
+                            onSubmit={rechercheFilms} /> {/* Barre de recherche */}
                     </div>
                 </div>
             </div>
