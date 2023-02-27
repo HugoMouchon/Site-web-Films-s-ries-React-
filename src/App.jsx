@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { filmsSeriesAPI } from './api/films_series';
-import { DetailsFilms } from './components/details/DetailsFilms';
+import { DetailsFilms } from './components/DetailsFilms/DetailsFilms';
 import { Logo } from './components/Logo/Logo';
 import { BACKDROP_BASE_URL } from './config';
 import './global.css';
 import style from "./style.module.css";
 import logo from './assets/images/logo.png';
 import { RecommandationListe } from './components/RecommandationListe/RecommandationListe';
+// import { RecommandationListe } from './components/RecommandationListe/RecommandationListe';
 
 
 // Notre application
@@ -57,10 +58,21 @@ export function App() {
                 </div>
             </div>
             <div className={style.details_films}>
-                {filmPopulaire && <DetailsFilms detail={filmPopulaire} />}
+                {
+                    filmPopulaire &&
+                    <DetailsFilms
+                        detail={filmPopulaire}
+                    />
+                }
             </div>
             <div className={style.recommandation}>
-                {filmRecommandationListe && <RecommandationListe tvShowlist={filmRecommandationListe}/>}
+                {
+                    filmRecommandationListe && filmRecommandationListe.length > 0 &&
+                    <RecommandationListe
+                        onClickItem={setFilmPopulaire}
+                        recommandationListe={filmRecommandationListe}
+                    />
+                }
             </div>
         </div>
     );

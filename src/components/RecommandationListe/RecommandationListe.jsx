@@ -1,14 +1,16 @@
-// import style from './style.module.css';
 import { RecommandationListeItem } from '../RecommandationListeItem/RecommandationListeItem';
+import style from './style.module.css';
 
-export function RecommandationListe({ tvShowlist }) {
+export function RecommandationListe({ recommandationListe, onClickItem }) {
     return (
         <>
-            <div>Vous pourriez aimer aussi:</div>
-            <div>
-                {tvShowlist.map((tvShow) => {
+            <div className={style.titre}>Vous pourriez aussi aimer:</div>
+            <div className={style.liste}>
+                {recommandationListe.map((filmsTV) => {
                     return (
-                        <RecommandationListeItem tvShow={tvShow} onClick={() => ""} />
+                        <span key={filmsTV.id} className={style.liste_item}>
+                            <RecommandationListeItem onClick={onClickItem} filmsTV={filmsTV} />
+                        </span>
                     );
                 })}
             </div>
