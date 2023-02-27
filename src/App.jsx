@@ -8,7 +8,8 @@ import './global.css';
 import style from "./style.module.css";
 import logo from './assets/images/logo.png';
 import { RecommandationListe } from './components/RecommandationListe/RecommandationListe';
-// import { RecommandationListe } from './components/RecommandationListe/RecommandationListe';
+import { BarreDeRecherche } from './components/BarreDeRecherche/BarreDeRecherche';
+
 
 
 // Notre application
@@ -56,7 +57,7 @@ export function App() {
                         <Logo image={logo} titre="Watowatch" sousTitre="Trouve le film fais pour toi " />{/* Appel du composant Logo qui prend en paramètre une image, un titre et un sous-titre*/}
                     </div>
                     <div className='col-sm-12 col-md-4'> {/* Prend tout l'ecran sur mobile sinon 4 col sur 12 sur PC (responsive)*/}
-                        <input style={{ width: "100%" }} type="text" /> {/* Barre de recherche */}
+                        <BarreDeRecherche/> {/* Barre de recherche */}
                     </div>
                 </div>
             </div>
