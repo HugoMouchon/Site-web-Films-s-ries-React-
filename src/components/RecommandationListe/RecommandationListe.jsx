@@ -10,7 +10,7 @@ import style from './style.module.css';
 export function RecommandationListe({ recommandationListe, onClickItem }) {
     return (
         <>
-            <div className={style.titre}>Vous pourriez aussi aimer:</div>
+            <div className={style.titre}>Vous pourriez aussi aimer :</div>
             <div className={style.liste}>
                 {recommandationListe.map((filmsTV) => {
                     return (

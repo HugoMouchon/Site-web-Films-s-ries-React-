@@ -11,5 +11,9 @@ const BACKDROP_BASE_URL = "https://image.tmdb.org/t/p/original/";
 // Déclaration d'une constante qui réduit la taille des images à 300 pour pouvoir être utilisé pour les CARDS de l'onglet recommandation
 const SMALL_IMG_COVER_BASE_URL = "https://image.tmdb.org/t/p/w300/";
 
+// Déclaration d'une constante qui stock le début de l'URL de Youtube.
+const YOUTUBE = "https://www.youtube.com/watch?v=";
 
-export {BASE_URL, API_KEY_PARAM, BACKDROP_BASE_URL, SMALL_IMG_COVER_BASE_URL};
+
+export {BASE_URL, API_KEY_PARAM, BACKDROP_BASE_URL, SMALL_IMG_COVER_BASE_URL, YOUTUBE};
+

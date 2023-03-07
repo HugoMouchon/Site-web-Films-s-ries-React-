@@ -3,20 +3,19 @@ import { useEffect } from 'react';
 import { filmsSeriesAPI } from './api/films_series';
 import { DetailsFilms } from './components/DetailsFilms/DetailsFilms';
 import { Logo } from './components/Logo/Logo';
-import { BACKDROP_BASE_URL } from './config';
+import { BACKDROP_BASE_URL, YOUTUBE } from './config';
 import './global.css';
 import style from "./style.module.css";
 import logo from './assets/images/logo.png';
 import { RecommandationListe } from './components/RecommandationListe/RecommandationListe';
 import { BarreDeRecherche } from './components/BarreDeRecherche/BarreDeRecherche';
 
-
-
 // Notre application
 export function App() {
     // Déclaration d'une constante utilisant "useState" de React avec pour valeur "filmPopulaire" et son state "setFilmPopulaire" pour le mettre à jours
     const [filmPopulaire, setFilmPopulaire] = useState(null);
     const [filmRecommandationListe, setFilmRecommandationListe] = useState([]);
+
 
     // Fonction Asynchrone qui récupère les films les plus populaires à partir de l'API tmdb et définit le film le plus populaire comme étant le film à afficher. 
     async function fetchPopulars() {
@@ -38,11 +37,13 @@ export function App() {
             if (recommandations.length > 0) {
                 setFilmRecommandationListe(recommandations.slice(0, 10));
             }
+
         } catch (error) {
             alert("Erreur durant la recherche des séries recommandées")
         }
-
     }
+
+
     // Appel de la fonction Asynchrone "fetchPopulars()" grace à l'Utilisation du Hooks "UseEffect" permettant de le rendre qu'une seule fois (grâce au [] vide).
     useEffect(() => {
         fetchPopulars();
@@ -64,7 +65,6 @@ export function App() {
         } catch (error) {
             alert("Erreur durant la recherche de la série ")
         }
-
     }
 
     return (

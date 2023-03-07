@@ -17,7 +17,7 @@ export function DetailsFilms({ detail }) {
         <div>
             <div className={style.titre}>{detail.name}</div>
             <div className={style.etoile_container}>
-                <ClassementEtoiles etoile={etoile}    /> 
+                <ClassementEtoiles etoile={etoile} />
                 <div className={style.etoile}>{etoile}</div>
             </div>
             <div className={style.synopsis}>{detail.overview}</div>

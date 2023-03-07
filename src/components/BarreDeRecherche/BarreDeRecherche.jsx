@@ -9,7 +9,6 @@ export function BarreDeRecherche({ onSubmit }) {
         onSubmit(event.target.value);
     } 
 
-
     return (
         <>
             <Search className={style.icon} size={27} />
